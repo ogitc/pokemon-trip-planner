@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: pokemon-backend
+    ports:
+      - "8000:8000"
+    # if you want to see logs more clearly:
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: pokemon-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
