@@ -50,7 +50,7 @@ This document explains how I used AI tools (specifically ChatGPT) while working 
 
 - Asked ChatGPT for simple CSS to keep the app centered and readable (container layout, basic cards, etc.).
 
-### 4. DevOps / DX polish
+### 4. DevOps
 
 - Used ChatGPT to scaffold:
   - `Dockerfile` for backend (FastAPI + Uvicorn)

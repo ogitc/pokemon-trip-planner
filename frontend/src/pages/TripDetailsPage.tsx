@@ -100,7 +100,7 @@ export default function TripDetailsPage() {
       <p>
         {formatDate(trip.start_date)} – {formatDate(trip.end_date)} (
         {trip.stops.length > 0
-          ? // compute duration on UI as well if needed:
+          ?
             `${Math.round(
               (new Date(trip.end_date).getTime() -
                 new Date(trip.start_date).getTime()) /

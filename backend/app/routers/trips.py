@@ -11,6 +11,9 @@ router = APIRouter()
 
 
 def build_trip_details(trip: models.Trip, session: Session) -> schemas.TripDetails:
+    """
+    Builds a trip details object for a given trip ID.
+    """
     locations = session.exec(
         select(models.TripLocation).where(models.TripLocation.trip_id == trip.id)
     ).all()
@@ -46,15 +49,15 @@ def list_trips(session: Session = Depends(get_session)):
     trips = session.exec(select(models.Trip)).all()
     summaries: List[schemas.TripSummary] = []
 
-    for t in trips:
-        duration = (t.end_date - t.start_date).days + 1
+    for trip in trips:
+        duration = (trip.end_date - trip.start_date).days + 1
         summaries.append(
             schemas.TripSummary(
-                id=t.id,
-                name=t.name,
-                description=t.description,
-                start_date=t.start_date,
-                end_date=t.end_date,
+                id=trip.id,
+                name=trip.name,
+                description=trip.description,
+                start_date=trip.start_date,
+                end_date=trip.end_date,
                 duration_days=duration,
             )
         )
@@ -69,7 +72,7 @@ def create_trip(trip_in: schemas.TripCreate, session: Session = Depends(get_sess
     if not trip_in.stops:
         raise HTTPException(status_code=400, detail="Trip must have at least one stop")  # return 400 Bad Request
 
-    start_date = min(s.arrival_date for s in trip_in.stops)
+    start_date = min(stop.arrival_date for stop in trip_in.stops)
     end_date = max(
         s.arrival_date + timedelta(days=s.duration_days - 1)
         for s in trip_in.stops

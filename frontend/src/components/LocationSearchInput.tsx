@@ -29,7 +29,7 @@ export default function LocationSearchInput({ onSelect }: Props) {
       } finally {
         setLoading(false);
       }
-    }, 400); // debounce
+    }, 400);
 
     return () => clearTimeout(timeout);
   }, [query]);

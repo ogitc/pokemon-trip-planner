@@ -22,7 +22,7 @@ def get_location_area_details(location_area_name: str) -> Dict:
 
 def search_location_areas(query: str, num_results_limit: int) -> List[dict]:
     """
-    Very simple search: fetch first 1000 location-areas and filter by name containing the query.
+    fetch first 1000 location-areas and filter by name containing the query.
     """
     url = f"{BASE_URL}/location-area"
     resp = httpx.get(url, params={"limit": LOCATION_AREAS_SEARCH_LIMIT}, timeout=GENERAL_TIMEOUT)

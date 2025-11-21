@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db import init_db
 from .routers import trips, locations, pokemon
 
+
 app = FastAPI(title="Pokemon Trip Planner API")
 
 
